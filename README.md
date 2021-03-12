@@ -34,15 +34,17 @@ It should work out of the box with the default values without any configuration 
 
 ## Configuration and Customization
 
-`g:loaded_vim_cord`
+```vimscript
+g:loaded_vim_cord
+```
 Set it to anything to disable vim-cord.
-
-/-----------------------------------------/
 
 Vim-Cord will try to detect which editor you are using from your Vim environment,
 you can override that by setting
 
-`g:vim_cord_editor_override`
+```vimscript
+g:vim_cord_editor_override
+```
 Possible values are:
 - vi
 - vim
@@ -52,78 +54,112 @@ Possible values are:
 
 This is the app that will show on discord, for example if you select Vi, your RPC will be `"Playing Vi"`
 
-/-----------------------------------------/
 
-`g:vim_cord_app_id_override`
+
+```vimscript
+g:vim_cord_app_id_override
+```
 
 Will set a catchall discord application ID for Vim-Cord to use, this supersedes `g:vim_cord_editor_override`
 
-/-----------------------------------------/
 
-`g:vim_cord_<EDITOR_NAME>_app_id` 
+
+```vimscript
+g:vim_cord_<EDITOR_NAME>_app_id 
+```
 
 This can be used to give a custom discord app id to each of the built-in supported editors, for example:
 
-/-----------------------------------------/
+
 
 `let g:vim_cord_vim_app_id = 836288358629062416` will make Vim-cord use "836288358629062416" as the discord app ID
 
 if it determines vim is the editor in use either by override or by detecting the environment.
 
-/-----------------------------------------/
 
-`g:vim_cord_update_delay` 
+
+```vimscript
+g:vim_cord_update_delay
+```
 
 This is the delay in **seconds** between each automatic update, 
 Vim-Cord will update when moving buffers buffers but also periodically.
 Set it to -1 to disable periodic updating.
 
-/-----------------------------------------/
 
-`g:vim_cord_disable_image` (Default: 0)
+
+```vimscript
+g:vim_cord_disable_image (Default: 0)
+```
 
 Set it to 1 if you don't want the images in your RPC, this means there will only be text info.
 
-/-----------------------------------------/
 
-`g:vim_cord_disable_small_image` (Default: 0)
+
+```vimscript
+g:vim_cord_disable_small_image (Default: 0)
+```
 
 Set it to 1 if you wan't to disable only the small image in your RPC, which usually shows the editor icon
 The large image with the language icon will sill show.
 
-/-----------------------------------------/
 
-`g:vim_cord_contract_bytes` (Default: 1)
+
+```vimscript
+g:vim_cord_contract_bytes (Default: 1)
+```
 
 Set it to 0 if you don't want SI units to be used to show the filesize,
 With contract_bytes enabled it would show: `8kiB` / `8kB`
 And with contract_bytes disabled, it would show `8000B`
 
-/-----------------------------------------/
 
-`g:vim_cord_bytes_1000` (Default: 0)
+
+```vimscript
+g:vim_cord_bytes_1000 (Default: 0)
+```
 
 Set whether to use 1000 or 1024 for the byte contraction, 
 if set to 1 RPC will show kilobytes (kB), megabytes (MB), etc...
 Otherwise if set to 0, kibibytes (kiB), mebibytes (MiB), etc... will be shown.
 
-/-----------------------------------------/
 
-`g:vim_cord_alert_on_fail` (Default: 1)
+
+```vimscript
+g:vim_cord_alert_on_fail (Default: 1)
+```
 
 If set to 1, Vim-Cord will display an error message if it fails to connect to discord (If discord is not open for example)
 set to 0 to fail silently.
 
-/-----------------------------------------/
 
 
-`g:vim_cord_alert_on_success` (Default: 1)
+```vimscript
+g:vim_cord_alert_on_success (Default: 1)
+```
 
 If set to 1, Vim-Cord will inform you when it connects, set to 0 to connect silently.
 
-/-----------------------------------------/
+```vimscript
+g:vim_cord_large_image_custom = { dict }
+```
 
-`g:vim_cord_timer_tracking_type` (Default: 'buffer_remember')
+Use this to setup custom text on the large image for each filetype.
+The keys should be the filtype as vim sees it and the values should be the custom text.
+**WARNING: Values must be 2 characters or more.**
+
+
+```vimscript
+g:vim_cord_large_image_custom = { dict }
+```
+
+Set this to override the editor name showing up on the small image on discord.
+**WARNING: Values must be 2 characters or more.**
+
+
+```vimscript
+g:vim_cord_timer_tracking_type (Default: 'buffer_remember')
+```
 
 This setting determines how Vim-Cord will display the timer on your RPC:
 
@@ -133,7 +169,7 @@ This setting determines how Vim-Cord will display the timer on your RPC:
 
 - `'buffer_remember'` Works like `'buffer'` but Vim-Cord will remember how long a buffer was open when you left it if you come back to it.
 
-/-----------------------------------------/
+
 
 ## Commands
 `:VimCordReconnect` Use it to force a reconnection retry at anytime, configuration is parsed again,
@@ -154,20 +190,14 @@ Make sure you are running Neovim with the same account you installed it. It will
 
 ## TODO
 
-- **Priority** Add nice icons for all apps on discord
-
 - Add screenshots to README.md
 
-- Add a way to customize programming language names on large_image
-
-- Add a way to customize editor name on small_image
+- Add support for Netrw, Nerdtree, help buffers, scratch buffers etc...
 
 - Add more customization on the info displayed as text
 
 - Disable plugin on "project"/"file"
 
-- Test on Vim (not Neovim)
+- Connection timeout on nvim launch
 
-- Connection timeout on vim launch
-
-- Connection retry on vim launch
+- Connection retry on nvim launch
